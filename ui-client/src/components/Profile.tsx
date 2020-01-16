@@ -16,17 +16,17 @@ interface PropTypes {
 }
 
 const AuthenticatedProfile = (props) => {
-    const { user: { profile: { userId, alias, createdAt, image, bio, website, location }, loading, isAuthenticated } } = props;
+    const { user: { profile: { userId, alias, email, createdAt, img, bio, website, location }, loading, isAuthenticated } } = props;
     return (
         <Paper className= "paper">
             <div className="profile">
                 <div className="image-wrapper">
-                    <img src={image} alt="profile image" />
+                    <img src={img} alt="profile image" className="profile-image"/>
                 </div>
                 <hr />
                 <div className="profile-details">
                     <MuiLink component={Link} to={`/users/${userId}`} color="primary" variant="h5">
-                        @{alias}
+                        @{email}
                     </MuiLink>
                     <hr />
                     {bio && <Typography variant="body2">{bio}</Typography>}

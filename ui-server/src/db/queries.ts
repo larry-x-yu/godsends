@@ -75,10 +75,11 @@ export const insertScream = (scream: any[]) => insert(qInsertScream, scream);
 
 // Inserts a user
 const qInsertUser = `
-INSERT INTO users (email, img) VALUES ($1, $2)
+INSERT INTO users (email, password, img) VALUES ($1, $2, $3)
 RETURNING id;
 `;
-export const insertUser = (email: string, password: string) => insert(qInsertUser, [email, password]);
+export const insertUser =
+    (email: string, password: string, avatar: string) => insert(qInsertUser, [email, password, avatar]);
 
 // Inserts a user
 const qGetUserById = `

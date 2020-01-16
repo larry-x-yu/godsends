@@ -81,10 +81,10 @@ RETURNING id;
 exports.insertScream = (scream) => insert(qInsertScream, scream);
 // Inserts a user
 const qInsertUser = `
-INSERT INTO users (email, img) VALUES ($1, $2)
+INSERT INTO users (email, password, img) VALUES ($1, $2, $3)
 RETURNING id;
 `;
-exports.insertUser = (email, password) => insert(qInsertUser, [email, password]);
+exports.insertUser = (email, password, avatar) => insert(qInsertUser, [email, password, avatar]);
 // Inserts a user
 const qGetUserById = `
 SELECT * from USERS WHERE id=$1;

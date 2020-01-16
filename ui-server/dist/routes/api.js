@@ -105,7 +105,7 @@ router.post(`/login`, (req, res) => __awaiter(void 0, void 0, void 0, function* 
 }));
 router.post(`/signup`, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const userId = yield queries_1.insertUser(req.body.email, req.body.password);
+        const userId = yield queries_1.insertUser(req.body.email, req.body.password, "images/monkey.png");
         if (userId) {
             res.json(userId);
         }

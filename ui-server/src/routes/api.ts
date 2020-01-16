@@ -96,7 +96,7 @@ router.post(`/login`, async (req: any, res: any) => {
 
 router.post(`/signup`, async (req: any, res: any) => {
     try {
-        const userId = await insertUser(req.body.email, req.body.password);
+        const userId = await insertUser(req.body.email, req.body.password, "images/monkey.png");
         if (userId) {
             res.json(userId);
         } else {
