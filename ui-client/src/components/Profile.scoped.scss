@@ -1,4 +1,4 @@
-:local(.paper) {
+.paper {
     padding: 20px;
     .buttons {
         text-align: center;
@@ -8,7 +8,7 @@
     }
 }
 
-:local(.profile) {
+.profile {
     & .image-wrapper {
         text-align: "center";
         position: "relative";

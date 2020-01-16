@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import "./Profile.module.scss";
+import "./Profile.scoped.scss";
 import { Link, Redirect } from "react-router-dom";
 import MuiLink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
