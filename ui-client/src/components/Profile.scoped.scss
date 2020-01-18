@@ -12,10 +12,18 @@
     & .image-wrapper {
         text-align: center;
         position: relative;
+        & input[type="file"] {
+            width: 0.1px;
+            height: 0.1px;
+            opacity: 0;
+            overflow: hidden;
+            position: absolute;
+            z-index: -1;
+        }
         & button {
             position: absolute;
-            top: "80%";
-            left: "70%";
+            top: 80%;
+            left: 70%;
         }
 
         & .profile-image {

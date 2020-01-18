@@ -1,7 +1,7 @@
 import { createAction } from 'redux-action';
 import axios from 'axios';
 import { from } from "rxjs";
-import { clearErrors, setErrors, setLoadingUIComplete, setLoadingUI } from './uiActions';
+import { clearErrors, setErrors, setLoadingUIComplete, setLoadingUI, LOADING_UI } from './uiActions';
 import { tap } from "rxjs/operators";
 
 export const SET_AUTHENTICATED = 'SET_AUTHENTICATED';
@@ -61,7 +61,7 @@ export const signupUser = (userData, history) => dispatch => {
             });
 };
 
-export const getUserData = (userId) => dispatch => {
+export const getUser = (userId) => dispatch => {
     dispatch(setLoadingUser());
     from(axios.get(`/users/${userId}`))
         .pipe(
@@ -74,6 +74,18 @@ export const getUserData = (userId) => dispatch => {
                 dispatch(setErrors({ general: err.response.data }));
             });
 };
+
+export const updateAvatar = (userId, formData) => dispatch => {
+    dispatch(clearErrors());
+    dispatch(setLoadingUser());
+    from(axios.post(`/users/${userId}/updateAvatar`, formData, {headers: {"Content-Type": "multipart/form-data"}}))
+        .subscribe(
+            _ => dispatch(getUser),
+            err => {
+                dispatch(setErrors({ general: err.response.data }));
+            }
+        );
+}
 
 export const setUser = createAction(SET_USER);
 export const setAuthenticated = createAction(SET_AUTHENTICATED);
