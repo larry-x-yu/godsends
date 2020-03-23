@@ -16,9 +16,6 @@ export const loginUser = (userData, history) => dispatch => {
     dispatch(clearErrors());
 
     from(axios.post("/login", userData))
-        .pipe(
-            tap(_ => dispatch(setLoadingUIComplete()))
-        )
         .subscribe(
             res => {
                 dispatch(setAuthenticated());
@@ -33,7 +30,9 @@ export const loginUser = (userData, history) => dispatch => {
                     errors = { general: "Unable to login due to unknown errors" };
                 }
                 dispatch(setErrors(errors));
-            });
+            },
+            () => dispatch(setLoadingUIComplete())
+        )
 };
 
 export const signupUser = (userData, history) => dispatch => {
@@ -78,7 +77,7 @@ export const getUser = (userId) => dispatch => {
 export const updateAvatar = (userId, formData) => dispatch => {
     dispatch(clearErrors());
     dispatch(setLoadingUser());
-    from(axios.post(`/users/${userId}/updateAvatar`, formData, {headers: {"Content-Type": "multipart/form-data"}}))
+    from(axios.post(`/users/${userId}/updateAvatar`, formData, { headers: { "Content-Type": "multipart/form-data" } }))
         .subscribe(
             _ => dispatch(getUser),
             err => {

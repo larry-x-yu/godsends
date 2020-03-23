@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { connect } from "react-redux";
-import {loginUser} from "../redux/actions/userActions";
+import { loginUser } from "../redux/actions/userActions";
 
 interface Props {
     history: any;
@@ -42,8 +42,8 @@ export class login extends Component<Props> {
     };
 
     render() {
-        const { UI: {loading} } = this.props;
-        const {errors} = this.state;
+        const { UI: { loading } } = this.props;
+        const { errors } = this.state;
 
         const errorMessages =
             errors && errors.length > 0 ? (
