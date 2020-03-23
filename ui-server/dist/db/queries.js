@@ -90,6 +90,9 @@ const qGetUserById = `
 SELECT * from USERS WHERE id=$1;
 `;
 exports.getUserById = (userId) => queryOne(qGetUserById, userId);
+// Update a user's avatar
+const qUpdateAvator = `UPDATE users SET img=$2 WHERE id=$1`;
+exports.updateAvator = (userId, img) => queryOne(qUpdateAvator, [userId, img]);
 // Inserts a comment
 const qInsertComment = `
 INSERT INTO comments (userId, screamId, comment)

@@ -19,6 +19,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const uploader_1 = require("./../utils/uploader");
 const path_1 = __importDefault(require("path"));
 const express = __importStar(require("express"));
 const queries_1 = require("./../db/queries");
@@ -60,7 +61,7 @@ router.put(`/screams`, (req, res) => __awaiter(void 0, void 0, void 0, function*
         res.status(500).json({ error: err.message || err });
     }
 }));
-// router.post(`/user`, uploadAvatar.single("avatar"), async (req: any, res) => {
+// router.post(`/users`, uploadAvatar.single("avatar"), async (req: any, res) => {
 //     try {
 //         Log.debug(JSON.stringify(req.body));
 //         const userId = await insertUser([`${req.body.email}`, `${req.file.filename}`]);
@@ -69,16 +70,15 @@ router.put(`/screams`, (req, res) => __awaiter(void 0, void 0, void 0, function*
 //         res.status(500).json({ error: err.message || err });
 //     }
 // });
-router.post(`/upload`, (req, res) => {
+router.post(`/users/:userid/updateAvatar`, uploader_1.uploadAvatar.single("avatar"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        // const filename = upload(req, res);
+        yield queries_1.updateAvator(req.params.userId, `${req.file.filename}`);
+        res.json({ message: "Avatar updated successfully" });
     }
     catch (err) {
-        // tslint:disable-next-line: no-console
-        console.log(err);
         res.status(500).json({ error: err.message || err });
     }
-});
+}));
 router.post(`/screams/:screamId/comments`, (req, res) => {
     try {
         //

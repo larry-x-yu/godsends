@@ -20,25 +20,10 @@ const avatarStorage = multer.diskStorage({
     filename: (req, file, cb) => {
         const ext = file.originalname.split(".")[file.originalname.split(".").length - 1];
         const filename = uuid() + "." + ext;
+        // tslint:disable-next-line: no-console
+        console.log(filename);
         cb(null, filename);
     }
 });
 
 export const uploadAvatar = multer({ storage: avatarStorage });
-
-// export const upload = (req: any, res: any) => {
-//     const busboy = new Busboy({ headers: req.headers });
-//     let targetFilename = "default_image.png";
-//     busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
-//         const ext = filename.split(".")[filename.split(".").length - 1];
-//         targetFilename = uuid() + "." + ext;
-//         // tslint:disable-next-line: no-console
-//         file.pipe(fs.createWriteStream(path.join(getUploadDir(), targetFilename)));
-//     });
-//     busboy.on("finish", () => {
-//         res.json({ message: "File uploaded successfully" });
-//         res.end();
-//     });
-//     req.pipe(busboy);
-//     return targetFilename;
-// };

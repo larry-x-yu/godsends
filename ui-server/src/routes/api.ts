@@ -1,3 +1,4 @@
+import { uploadAvatar } from "./../utils/uploader";
 import path from "path";
 import * as express from "express";
 import {
@@ -8,8 +9,10 @@ import {
     getCommentsByScream,
     insertComment,
     getUserById,
-    getUserByEmailAndPassword
+    getUserByEmailAndPassword,
+    updateAvator
 } from "./../db/queries";
+import { Log } from "./../utils/logger";
 
 const router = express.Router();
 
@@ -51,7 +54,7 @@ router.put(`/screams`, async (req: any, res) => {
     }
 });
 
-// router.post(`/user`, uploadAvatar.single("avatar"), async (req: any, res) => {
+// router.post(`/users`, uploadAvatar.single("avatar"), async (req: any, res) => {
 //     try {
 //         Log.debug(JSON.stringify(req.body));
 //         const userId = await insertUser([`${req.body.email}`, `${req.file.filename}`]);
@@ -61,12 +64,11 @@ router.put(`/screams`, async (req: any, res) => {
 //     }
 // });
 
-router.post(`/upload`, (req: any, res: any) => {
+router.post(`/users/:userid/updateAvatar`, uploadAvatar.single("avatar"), async (req: any, res) => {
     try {
-        // const filename = upload(req, res);
+        await updateAvator(req.params.userId, `${req.file.filename}`);
+        res.json({ message: "Avatar updated successfully" });
     } catch (err) {
-        // tslint:disable-next-line: no-console
-        console.log(err);
         res.status(500).json({ error: err.message || err });
     }
 });
