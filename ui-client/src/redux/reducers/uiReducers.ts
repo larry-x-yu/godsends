@@ -15,7 +15,8 @@ const uiReducers = (state = initialState, action: any) => {
         case SET_ERRORS:
             return {
                 ...state,
-                errors: {...action.payload}
+                errors: {...action.payload},
+                loading: false
             }
         case CLEAR_ERRORS:
             return {

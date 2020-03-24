@@ -18,9 +18,6 @@ interface Props {
 export class login extends Component<Props> {
     handleSubmit = event => {
         event.preventDefault();
-        this.setState({
-            loading: true
-        });
         const userData = {
             email: this.state.email,
             password: this.state.password
@@ -36,23 +33,13 @@ export class login extends Component<Props> {
 
     state = {
         email: "",
-        password: "",
-        loading: false,
-        errors: []
+        password: ""
     };
 
     render() {
-        const { UI: { loading } } = this.props;
-        const { errors } = this.state;
-
+        const { UI: { loading, errors } } = this.props;
         const errorMessages =
-            errors && errors.length > 0 ? (
-                <ul>
-                    {errors.map((e, id) => (
-                        <li key={id}>{e}</li>
-                    ))}
-                </ul>
-            ) : null;
+            errors && errors['general'] ? errors['general'] : null;
 
         return (
             <Grid container className={css.form}>
@@ -70,7 +57,7 @@ export class login extends Component<Props> {
                             color="error"
                             component={"div"}
                         >
-                            {errorMessages}
+                            <div>{errorMessages}</div>
                         </Typography>
                     )}
                     <form noValidate onSubmit={this.handleSubmit}>

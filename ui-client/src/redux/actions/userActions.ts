@@ -30,8 +30,7 @@ export const loginUser = (userData, history) => dispatch => {
                     errors = { general: "Unable to login due to unknown errors" };
                 }
                 dispatch(setErrors(errors));
-            },
-            () => dispatch(setLoadingUIComplete())
+            }
         )
 };
 
