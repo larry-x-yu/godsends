@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import css from "./signup.module.scss";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -10,13 +9,15 @@ import isEmail from "validator/lib/isEmail";
 import { connect } from "react-redux";
 import { signupUser } from "../redux/actions/userActions";
 
+import "./Signup.scoped.scss";
+
 interface Props {
     user: any,
     signupUser: (userData, history) => void;
     history: any;
 }
 
-export class signup extends Component<Props> {
+export class Signup extends Component<Props> {
     state = {
         email: "",
         password: "",
@@ -82,13 +83,13 @@ export class signup extends Component<Props> {
         const errorMessages = errors["general"] && <p>{errors["general"]}</p>;
 
         return (
-            <Grid container className={css.form}>
+            <Grid container className="form">
                 <Grid item sm></Grid>
                 <Grid item sm>
                     <img
                         src="/images/monkey.png"
                         alt="Monkey"
-                        className={css.image}
+                        className="image"
                     />
                     <Typography variant="h2">Sign Up</Typography>
                     {errorMessages && (
@@ -108,7 +109,7 @@ export class signup extends Component<Props> {
                             label="Email"
                             value={this.state.email}
                             onChange={this.handleChange}
-                            className={css["text-field"]}
+                            className="text-field"
                             required={true}
                             helperText={errors["email"]}
                             error={errors["email"] ? true : false}
@@ -121,7 +122,7 @@ export class signup extends Component<Props> {
                             label="Password"
                             value={this.state.password}
                             onChange={this.handleChange}
-                            className={css["text-field"]}
+                            className="text-field"
                             required={true}
                             helperText={errors["password"]}
                             error={errors["password"] ? true : false}
@@ -134,7 +135,7 @@ export class signup extends Component<Props> {
                             label="Confirm Password"
                             value={this.state.confirmPassword}
                             onChange={this.handleChange}
-                            className={css["text-field"]}
+                            className="text-field"
                             required={true}
                             helperText={errors["confirmPassword"]}
                             error={errors["confirmPassword"] ? true : false}
@@ -151,7 +152,7 @@ export class signup extends Component<Props> {
                             {loading && (
                                 <CircularProgress
                                     size={30}
-                                    className={css.progress}
+                                    className="progress"
                                 ></CircularProgress>
                             )}
                         </Button>
@@ -176,4 +177,4 @@ const mapDispatchToProps = {
     signupUser,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

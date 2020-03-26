@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
-import css from "./login.module.scss";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
@@ -15,7 +14,7 @@ interface Props {
     loginUser: (userData: any, history: any) => void;
 }
 
-export class login extends Component<Props> {
+export class Login extends Component<Props> {
     handleSubmit = event => {
         event.preventDefault();
         const userData = {
@@ -42,13 +41,13 @@ export class login extends Component<Props> {
             authErrors && authErrors['general'] ? authErrors['general'] : null;
 
         return (
-            <Grid container className={css.form}>
+            <Grid container className="form">
                 <Grid item sm></Grid>
                 <Grid item sm>
                     <img
                         src="/images/monkey.png"
                         alt="Monkey"
-                        className={css.image}
+                        className="image"
                     />
                     <Typography variant="h2">Login</Typography>
                     {errorMessages && (
@@ -68,7 +67,7 @@ export class login extends Component<Props> {
                             label="Email"
                             value={this.state.email}
                             onChange={this.handleChange}
-                            className={css["text-field"]}
+                            className="text-field"
                             required={true}
                             fullWidth
                         ></TextField>
@@ -79,7 +78,7 @@ export class login extends Component<Props> {
                             label="Password"
                             value={this.state.password}
                             onChange={this.handleChange}
-                            className={css["text-field"]}
+                            className="text-field"
                             required={true}
                             fullWidth
                         ></TextField>
@@ -94,7 +93,7 @@ export class login extends Component<Props> {
                             {authenticating && (
                                 <CircularProgress
                                     size={30}
-                                    className={css.progress}
+                                    className="progress"
                                 ></CircularProgress>
                             )}
                         </Button>
@@ -119,4 +118,4 @@ const mapActionsToProps = {
     loginUser
 }
 
-export default connect(mapStateToProps, mapActionsToProps)(login);
+export default connect(mapStateToProps, mapActionsToProps)(Login);

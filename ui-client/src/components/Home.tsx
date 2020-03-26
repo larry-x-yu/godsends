@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
-import Scream from "../components/Scream";
-import Profile from "../components/Profile";
+import Scream from "./Scream";
+import Profile from "./Profile";
 
-export class home extends Component {
+export class Home extends Component {
     state = {
         screams: null
     };
@@ -41,4 +41,4 @@ export class home extends Component {
     }
 }
 
-export default home;
+export default Home;
