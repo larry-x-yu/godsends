@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import "./Profile.scoped.scss";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MuiLink from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import LocationOn from "@material-ui/icons/LocationOn";
@@ -21,7 +21,7 @@ interface PropTypes {
 }
 
 const AuthenticatedProfile = (props) => {
-    const { user: { profile: { userId, alias, email, createdAt, img, bio, website, location }, loading, isAuthenticated } } = props;
+    const { user: { profile: { userId, email, createdAt, img, bio, website, location } } } = props;
     return (
         <Paper className="paper">
             <div className="profile">
@@ -67,7 +67,7 @@ const AuthenticatedProfile = (props) => {
     )
 }
 
-const UnauthenticatedProfile = props => {
+const UnauthenticatedProfile = () => {
     return (
         <Paper className="paper">
             <Typography variant="body2" align="center">
@@ -90,21 +90,20 @@ class Profile extends Component<PropTypes> {
         const image = event.target.files[0];
         const formData = new FormData();
         formData.append("avatar", image, image.name);
-        console.log(this.props);
         this.props.updateAvatar(this.props.user?.profile?.id, formData);
     };
 
-    handleEditAvatar = event => {
+    handleEditAvatar = () => {
         const fileInput = document.getElementById('imageInput');
         fileInput.click();
     }
 
     render() {
         const {
-            user: { profile: { userId, alias, createdAt, image, bio, website, location }, loading, isAuthenticated }
+            user: { authenticating, isAuthenticated }
         } = this.props;
 
-        let profileMarkup = !loading ? (isAuthenticated ? (
+        let profileMarkup = !authenticating ? (isAuthenticated ? (
             <AuthenticatedProfile {...this.props} handleImageChange={this.handleImageChange} handleEditAvatar={this.handleEditAvatar} />
         ) : (<UnauthenticatedProfile />)) : (<p>Loading...</p>);
 

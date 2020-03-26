@@ -20,8 +20,6 @@ const avatarStorage = multer.diskStorage({
     filename: (req, file, cb) => {
         const ext = file.originalname.split(".")[file.originalname.split(".").length - 1];
         const filename = uuid() + "." + ext;
-        // tslint:disable-next-line: no-console
-        console.log(filename);
         cb(null, filename);
     }
 });

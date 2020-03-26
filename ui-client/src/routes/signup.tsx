@@ -9,12 +9,10 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import isEmail from "validator/lib/isEmail";
 import { connect } from "react-redux";
 import { signupUser } from "../redux/actions/userActions";
-import { setErrors } from "../redux/actions/uiActions";
 
 interface Props {
-    UI;
+    user: any,
     signupUser: (userData, history) => void;
-    setUIErrors: (errors) => boolean;
     history: any;
 }
 
@@ -23,7 +21,8 @@ export class signup extends Component<Props> {
         email: "",
         password: "",
         confirmPassword: "",
-        handle: ""
+        handle: "",
+        errors: {}
     };
 
     validateForm = () => {
@@ -47,7 +46,7 @@ export class signup extends Component<Props> {
             valid = false;
         }
 
-        !valid && this.props.setUIErrors(errors);
+        !valid && this.setState({ errors });
         return valid;
     };
 
@@ -76,9 +75,10 @@ export class signup extends Component<Props> {
 
     render() {
         const {
-            UI: { errors, loading }
+            user: { signupErrors, signingUp: loading }
         } = this.props;
 
+        const errors = { ...signupErrors, ...this.state.errors };
         const errorMessages = errors["general"] && <p>{errors["general"]}</p>;
 
         return (
@@ -169,12 +169,11 @@ export class signup extends Component<Props> {
 }
 
 const mapStateToProps = state => ({
-    UI: state.UI
+    user: state.user
 });
 
 const mapDispatchToProps = {
     signupUser,
-    setUIErrors: errors => dispatch => dispatch(setErrors())
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(signup);

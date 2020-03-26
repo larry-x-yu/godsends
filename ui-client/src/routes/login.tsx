@@ -10,9 +10,9 @@ import { connect } from "react-redux";
 import { loginUser } from "../redux/actions/userActions";
 
 interface Props {
+    user: any,
     history: any;
     loginUser: (userData: any, history: any) => void;
-    UI: any
 }
 
 export class login extends Component<Props> {
@@ -37,9 +37,9 @@ export class login extends Component<Props> {
     };
 
     render() {
-        const { UI: { loading, errors } } = this.props;
+        const { user: { authenticating, authErrors } } = this.props;
         const errorMessages =
-            errors && errors['general'] ? errors['general'] : null;
+            authErrors && authErrors['general'] ? authErrors['general'] : null;
 
         return (
             <Grid container className={css.form}>
@@ -88,10 +88,10 @@ export class login extends Component<Props> {
                             variant="contained"
                             color="primary"
                             style={{ marginTop: 20, position: "relative" }}
-                            disabled={loading}
+                            disabled={authenticating}
                         >
                             LOGIN
-                            {loading && (
+                            {authenticating && (
                                 <CircularProgress
                                     size={30}
                                     className={css.progress}
@@ -112,8 +112,7 @@ export class login extends Component<Props> {
 }
 
 const mapStateToProps = (state) => ({
-    user: state.user,
-    UI: state.UI
+    user: state.user
 });
 
 const mapActionsToProps = {

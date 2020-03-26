@@ -88,7 +88,7 @@ SELECT * from USERS WHERE id=$1;
 export const getUserById = (userId: any[]) => queryOne(qGetUserById, userId);
 
 // Update a user's avatar
-const qUpdateAvator = `UPDATE users SET img=$2 WHERE id=$1`;
+const qUpdateAvator = `UPDATE users SET img=$2 WHERE id=$1 RETURNING img`;
 export const updateAvator = (userId: string, img: string) => queryOne(qUpdateAvator, [userId, img]);
 
 // Inserts a comment

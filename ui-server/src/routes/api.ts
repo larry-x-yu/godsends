@@ -54,20 +54,10 @@ router.put(`/screams`, async (req: any, res) => {
     }
 });
 
-// router.post(`/users`, uploadAvatar.single("avatar"), async (req: any, res) => {
-//     try {
-//         Log.debug(JSON.stringify(req.body));
-//         const userId = await insertUser([`${req.body.email}`, `${req.file.filename}`]);
-//         res.json({ userId });
-//     } catch (err) {
-//         res.status(500).json({ error: err.message || err });
-//     }
-// });
-
 router.post(`/users/:userid/updateAvatar`, uploadAvatar.single("avatar"), async (req: any, res) => {
     try {
-        await updateAvator(req.params.userId, `${req.file.filename}`);
-        res.json({ message: "Avatar updated successfully" });
+        const img = await updateAvator(req.params.userid, `images/avatars/${req.file.filename}`);
+        res.json(img);
     } catch (err) {
         res.status(500).json({ error: err.message || err });
     }
@@ -77,8 +67,6 @@ router.post(`/screams/:screamId/comments`, (req: any, res: any) => {
     try {
         //
     } catch (err) {
-        // tslint:disable-next-line: no-console
-        console.log(err);
         res.status(500).json({ error: err.message || err });
     }
 });
