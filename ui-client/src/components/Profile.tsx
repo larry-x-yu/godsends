@@ -26,7 +26,7 @@ const AuthenticatedProfile = (props) => {
         <Paper className="paper">
             <div className="profile">
                 <div className="image-wrapper">
-                    <img src={img} alt="profile image" className="profile-image" />
+                    <img src={img} alt="avatar" className="profile-image" />
                     <input type="file" id="imageInput" onChange={props.handleImageChange} />
                     <Tooltip title="Edit profile picture" placement="top">
                         <IconButton onClick={props.handleEditAvatar}>

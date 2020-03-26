@@ -89,7 +89,7 @@ const userReducers = (state = initialState, action) => {
         case UPDATE_AVATAR_SUCCESS:
             return {
                 ...state,
-                profile: { ...action.payload },
+                profile: { ...state.profile, ...action.payload },
                 updateAvatarErrors: {},
                 updatingAvatar: false
             }
