@@ -30,10 +30,10 @@
     "validator": "^12.1.0"
   },
   "scripts": {
-    "start": "concurrently \"cd ../ui-server && npm start\" \"react-scripts start\"",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"cd ../ui-server && npm start\" \"craco start\"",
+    "build": "craco build",
+    "test": "craco test",
+    "eject": "craco eject"
   },
   "eslintConfig": {
     "extends": "react-app"
