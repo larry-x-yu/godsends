@@ -3,14 +3,15 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import styles from "./Navbar.module.scss";
 import { connect } from "react-redux";
+
+import "./Navbar.scoped.scss";
 
 const Navbar = ({ user}) => {
     const pathname = window.location.pathname;
     return (
         <AppBar>
-            <Toolbar className={styles['nav-container']}>
+            <Toolbar className='nav-container'>
                 <Button color="inherit" component={Link} to="/" disabled={pathname === "/"}>
                     Home
                     </Button>
