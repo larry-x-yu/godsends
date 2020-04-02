@@ -1,44 +1,44 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
 import axios from "axios";
 import Scream from "./Scream";
 import Profile from "./Profile";
 
-export class Home extends Component {
-    state = {
-        screams: null
-    };
+const Home = () => {
 
-    componentDidMount() {
+    let [screams, setScreams] = useState([]);
+
+    const getScreems = () => {
         axios
             .get("/screams")
             .then(res => {
-                this.setState({ screams: res.data });
+                setScreams(res.data);
             })
             .catch(err => {
                 console.log("Error getting screams from server: " + err);
             });
     }
 
-    render() {
-        let screams = this.state.screams ? (
-            this.state.screams.map((s: any) => (
-                <Scream key={s.id} scream={s}></Scream>
-            ))
-        ) : (
+    useEffect(() => getScreems());
+
+    let screamMarkups = screams ? (
+        screams.map((s: any) => (
+            <Scream key={s.id} scream={s}></Scream>
+        ))
+    ) : (
             <p>Loading...</p>
         );
-        return (
-            <Grid container spacing={10}>
-                <Grid item sm={8} xs={12}>
-                    {screams}
-                </Grid>
-                <Grid item sm={4} xs={12}>
-                    <Profile/>
-                </Grid>
+
+    return (
+        <Grid container spacing={10}>
+            <Grid item sm={8} xs={12}>
+                {screams}
             </Grid>
-        );
-    }
+            <Grid item sm={4} xs={12}>
+                <Profile />
+            </Grid>
+        </Grid>
+    );
 }
 
 export default Home;
