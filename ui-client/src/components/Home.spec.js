@@ -1,13 +1,10 @@
-import { unmountComponentAtNode } from "react-dom";
+import React from "react";
+import { configure } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 
-let container = null;
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
+import Home from "./Home";
 
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
+configure({ adapter: new Adapter() });
+import { shallow, mount, render } from 'enzyme';
+
+const wrapper = shallow(<Home />);
